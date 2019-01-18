@@ -41,16 +41,22 @@ function tree() {
     fi
 }
 
-#for colorsls
+#for colorls
 source $(dirname $(gem which colorls))/tab_complete.sh
 alias dir="colorls -d"
 alias files="colorls -f"
 alias report="colorls --report"
 
+
+regex='^~*[0-9a-z'
 function ls() {
     if [ -z $@ ]
     then
         command colorls
+    # Check if directory or file is passed as argument
+    elif [[ -d $1 ]] || [[ -e $1 ]]
+    then
+        command colorls $1
     else
     # Look into getops
     case $1 in
