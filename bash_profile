@@ -36,8 +36,11 @@ function tree() {
     if [ -z $@]
     then
         command colorls --tree
+    elif [[ $1 =~ ^-?[0-9]+$ ]]
+    then
+        command colorl --tree=$1
     else
-        command colorl --tree=$@
+        command tree "$@"
     fi
 }
 
